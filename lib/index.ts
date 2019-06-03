@@ -45,6 +45,7 @@ export function getTimeID(
 export function getDefaultsFor_getTimeIDOptions(): getTimeIDOptions {
 	let defaults = getDefaultsFor_SeparatorOptions();
 	defaults['order'] = __default_hmsOrder;
+	defaults['includeTimezoneOffset'] = true;
 	return defaults;
 }
 

@@ -3,7 +3,8 @@ import { SeparatorOptions, YearSeparatorOptions } from '@writetome51/year-separa
 
 
 export interface getTimeIDOptions extends SeparatorOptions {
-	order?: TimeFormatOrder
+	order?: TimeFormatOrder,
+	includeTimezoneOffset?: boolean
 }
 
 

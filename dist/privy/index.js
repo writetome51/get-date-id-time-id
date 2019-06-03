@@ -14,9 +14,19 @@ getParts) {
         throw new Error('Input must be string 3 characters long');
     var parts = getParts(defaultOptions);
     var sep = defaultOptions.separateEach ? defaultOptions.separator : '';
+    // @ts-ignore
+    var timezoneOffset = (defaultOptions.includeTimezoneOffset) ?
+        (defaultOptions.separator + getTimezoneOffset()) : '';
     return (parts[defaultOptions.order[0]] + sep + parts[defaultOptions.order[1]] +
-        sep + parts[defaultOptions.order[2]]);
+        sep + parts[defaultOptions.order[2]] + timezoneOffset);
 }
 exports.__getDateOrTimeID = __getDateOrTimeID;
+function getTimezoneOffset() {
+    var offsetMinutes = new Date().getTimezoneOffset();
+    var sign = (offsetMinutes < 0) ? '+' : '-';
+    var offsetHours = (offsetMinutes / 60);
+    return ('GMT' + sign + offsetHours);
+}
+exports.getTimezoneOffset = getTimezoneOffset;
 exports.__default_ymdOrder = 'ymd';
 exports.__default_hmsOrder = 'hms';

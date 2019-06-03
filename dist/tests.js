@@ -17,9 +17,13 @@ res = index_1.getDateID({ includeFullYear: true, order: 'mdy', separateEach: tru
 console.log(res);
 res = index_1.getDateID({ includeFullYear: true, order: 'mdy', separator: 'ee' }); // won't show separator.
 console.log(res);
-res = index_1.getTimeID({ separator: 'ee' }); // won't show separator.
+res = index_1.getTimeID();
 console.log(res);
 res = index_1.getTimeID({ separator: 'ee', separateEach: true });
 console.log(res);
 res = index_1.getTimeID({ separateEach: true, order: 'smh' });
+console.log(res);
+res = index_1.getTimeID({ separateEach: true, includeTimezoneOffset: false });
+console.log(res);
+res = index_1.getTimeID({ includeTimezoneOffset: false });
 console.log(res);

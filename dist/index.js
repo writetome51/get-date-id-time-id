@@ -26,6 +26,7 @@ exports.getTimeID = getTimeID;
 function getDefaultsFor_getTimeIDOptions() {
     var defaults = year_separator_options_1.getDefaultsFor_SeparatorOptions();
     defaults['order'] = privy_1.__default_hmsOrder;
+    defaults['includeTimezoneOffset'] = true;
     return defaults;
 }
 exports.getDefaultsFor_getTimeIDOptions = getDefaultsFor_getTimeIDOptions;

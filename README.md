@@ -16,6 +16,7 @@
     order?: 'hms' | 'hsm' | 'msh' | 'mhs' | 'smh' | 'shm', // default 'hms'
     separator?: string, // default '-' 
     separateEach?: boolean // default false
+    includeTimezoneOffset?: boolean // default true
 }
 ```
 
