@@ -27,3 +27,5 @@ res = index_1.getTimeID({ separateEach: true, includeTimezoneOffset: false });
 console.log(res);
 res = index_1.getTimeID({ includeTimezoneOffset: false });
 console.log(res);
+res = index_1.getTimeID({ separateEach: true, separator: '__' });
+console.log(res);

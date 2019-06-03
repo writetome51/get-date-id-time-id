@@ -6,6 +6,7 @@ import { getDateIDOptions, getTimeIDOptions } from './interfaces';
 export function __getDateOrTimeID(
 	defaultOptions: getDateIDOptions | getTimeIDOptions,
 	userProvidedOptions: getDateIDOptions | getTimeIDOptions,
+
 	// `combinedOptions` is `defaultOptions` with `userProvidedOptions` merged into it.
 	// must return object with 3 letter properties, either {y,m,d} or {h,m,s} .
 	getParts: (combinedOptions) => Object

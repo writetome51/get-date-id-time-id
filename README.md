@@ -39,17 +39,20 @@ getDateID({includeFullYear: true, order: 'mdy'});
 getDateID({includeFullYear: true, order: 'mdy', separateEach: true});
 // --> '05-22-2019'
 
-getTimeID(); // Time is 4:20pm and 25 seconds
-// --> '162025'
+getTimeID(); // Time is 12:20:25am, Rome,Italy
+// --> '002025-GMT+2'
+
+getTimeID(); // Time is 4:20:25pm, Denver Daylight-Savings-Time
+// --> '162025-GMT-6'
 
 getTimeID({separateEach:true});
-// --> '16-20-25'
+// --> '16-20-25-GMT-6'
 
 getTimeID({separateEach:true, separator: '__'});
-// --> '16__20__25'
+// --> '16__20__25__GMT-6'
 
 getTimeID({separateEach:true, separator: '__', order: 'smh'});
-// --> '25__20__16'
+// --> '25__20__16__GMT-6'
 ```
 
 

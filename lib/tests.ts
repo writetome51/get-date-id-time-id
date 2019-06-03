@@ -1,7 +1,5 @@
 import {
 	getDateID,
-	getDefaultsFor_getDateIDOptions,
-	getDefaultsFor_getTimeIDOptions,
 	getTimeID
 } from './index';
 
@@ -51,4 +49,8 @@ console.log(res);
 
 
 res = getTimeID({includeTimezoneOffset: false});
+console.log(res);
+
+
+res = getTimeID({separateEach: true, separator:'__'});
 console.log(res);
