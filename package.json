@@ -1,6 +1,6 @@
 {
   "name": "@writetome51/get-date-id-time-id",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Functions that return the current date as string of digits and return the current time as string of digits.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
