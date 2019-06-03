@@ -3,7 +3,11 @@ import { getArray_hoursMinutesSeconds, getArray_yearMonthDay }
 import { getDateIDOptions, getTimeIDOptions } from './privy/interfaces';
 import { getDefaultsFor_SeparatorOptions, getDefaultsFor_YearSeparatorOptions }
 	from '@writetome51/year-separator-options';
-import { __getDateOrTimeID, __default_hmsOrder, __default_ymdOrder } from './privy';
+import {
+	__getAssembledIDParts, __default_hmsOrder, __default_ymdOrder,
+	__getTimezoneOffset, __getMergedOptions
+}
+	from './privy';
 
 
 // Returns current date as string of digits.
@@ -13,32 +17,38 @@ export function getDateID(
 	options: getDateIDOptions = undefined
 ): string {
 
-	return __getDateOrTimeID(
-		getDefaultsFor_getDateIDOptions(),
-		options,
-		(combinedOptions) => {
-			let [year, month, day] = getArray_yearMonthDay(combinedOptions.includeFullYear);
+	let mergedOptions: getDateIDOptions = __getMergedOptions(options, getDefaultsFor_getDateIDOptions);
+
+	return __getAssembledIDParts(
+		mergedOptions,
+		() => {
+			let [year, month, day] = getArray_yearMonthDay(mergedOptions.includeFullYear);
 			return {y: year, m: month, d: day};
 		}
 	);
 }
 
 
-// Returns current time as string of digits.
-// Default format is hhmmss, i.e '162020' for 4:20pm and 20 seconds.
+// Returns current time as string of digits, plus the timezone offset.
+// Default format is hhmmss-offset, i.e '162025-GMT-6' for 4:20:25pm, Denver daylight time.
 
 export function getTimeID(
 	options: getTimeIDOptions = undefined
 ): string {
 
-	return __getDateOrTimeID(
-		getDefaultsFor_getTimeIDOptions(),
-		options,
+	let mergedOptions: getTimeIDOptions = __getMergedOptions(options, getDefaultsFor_getTimeIDOptions);
+
+	let timeID = __getAssembledIDParts(
+		mergedOptions,
 		() => {
 			let [hour, mins, secs] = getArray_hoursMinutesSeconds();
 			return {h: hour, m: mins, s: secs};
 		}
 	);
+	let timezoneOffset = (mergedOptions.includeTimezoneOffset) ?
+		(mergedOptions.separator + __getTimezoneOffset()) : '';
+
+	return (timeID + timezoneOffset);
 }
 
 

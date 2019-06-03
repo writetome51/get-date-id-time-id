@@ -7,20 +7,25 @@ var privy_1 = require("./privy");
 // Default format is yymmdd, i.e '190522' for May 22, 2019.
 function getDateID(options) {
     if (options === void 0) { options = undefined; }
-    return privy_1.__getDateOrTimeID(getDefaultsFor_getDateIDOptions(), options, function (combinedOptions) {
-        var _a = get_array_year_month_day_hours_minutes_seconds_1.getArray_yearMonthDay(combinedOptions.includeFullYear), year = _a[0], month = _a[1], day = _a[2];
+    var mergedOptions = privy_1.__getMergedOptions(options, getDefaultsFor_getDateIDOptions);
+    return privy_1.__getAssembledIDParts(mergedOptions, function () {
+        var _a = get_array_year_month_day_hours_minutes_seconds_1.getArray_yearMonthDay(mergedOptions.includeFullYear), year = _a[0], month = _a[1], day = _a[2];
         return { y: year, m: month, d: day };
     });
 }
 exports.getDateID = getDateID;
-// Returns current time as string of digits.
-// Default format is hhmmss, i.e '162020' for 4:20pm and 20 seconds.
+// Returns current time as string of digits, plus the timezone offset.
+// Default format is hhmmss-offset, i.e '162025-GMT-6' for 4:20:25pm, Denver daylight time.
 function getTimeID(options) {
     if (options === void 0) { options = undefined; }
-    return privy_1.__getDateOrTimeID(getDefaultsFor_getTimeIDOptions(), options, function () {
+    var mergedOptions = privy_1.__getMergedOptions(options, getDefaultsFor_getTimeIDOptions);
+    var timeID = privy_1.__getAssembledIDParts(mergedOptions, function () {
         var _a = get_array_year_month_day_hours_minutes_seconds_1.getArray_hoursMinutesSeconds(), hour = _a[0], mins = _a[1], secs = _a[2];
         return { h: hour, m: mins, s: secs };
     });
+    var timezoneOffset = (mergedOptions.includeTimezoneOffset) ?
+        (mergedOptions.separator + privy_1.__getTimezoneOffset()) : '';
+    return (timeID + timezoneOffset);
 }
 exports.getTimeID = getTimeID;
 function getDefaultsFor_getTimeIDOptions() {
