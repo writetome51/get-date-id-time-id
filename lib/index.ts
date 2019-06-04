@@ -30,7 +30,7 @@ export function getDateID(
 
 
 // Returns current time as string of digits, plus the timezone offset.
-// Default format is hhmmss-offset, i.e '162025-GMT-6' for 4:20:25pm, Denver daylight time.
+// Default format is hhmmss+-offset, i.e '162025-06' for 4:20:25pm, Denver daylight time.
 
 export function getTimeID(
 	options: getTimeIDOptions = undefined

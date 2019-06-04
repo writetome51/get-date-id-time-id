@@ -40,19 +40,19 @@ getDateID({includeFullYear: true, order: 'mdy', separateEach: true});
 // --> '05-22-2019'
 
 getTimeID(); // Time is 12:20:25am, Rome,Italy
-// --> '002025-GMT+2'
+// --> '002025+02'
 
 getTimeID(); // Time is 4:20:25pm, Denver Daylight-Savings-Time
-// --> '162025-GMT-6'
+// --> '162025-06'
 
 getTimeID({separateEach:true});
-// --> '16-20-25-GMT-6'
+// --> '16-20-25-06'
 
 getTimeID({separateEach:true, separator: '__'});
-// --> '16__20__25__GMT-6'
+// --> '16__20__25-06'
 
 getTimeID({separateEach:true, separator: '__', order: 'smh'});
-// --> '25__20__16__GMT-6'
+// --> '25__20__16-06'
 ```
 
 
