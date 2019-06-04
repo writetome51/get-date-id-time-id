@@ -24,8 +24,9 @@ export function __getAssembledIDParts(
 export function __getTimezoneOffset(): string {
 	let offsetMinutes = new Date().getTimezoneOffset();
 	let sign = (offsetMinutes < 0) ? '+' : '-';
-	let offsetHours = (offsetMinutes / 60);
-	return ('GMT' + sign + offsetHours);
+	let offsetHours = String(offsetMinutes / 60);
+	if (offsetHours.split('.')[0].length === 1) offsetHours = ('0' + offsetHours);
+	return (sign + offsetHours);
 }
 
 
