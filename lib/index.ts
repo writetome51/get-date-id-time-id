@@ -45,9 +45,8 @@ export function getTimeID(
 			return {h: hour, m: mins, s: secs};
 		}
 	);
-	let timezoneOffset = (mergedOptions.includeTimezoneOffset) ?
-		(mergedOptions.separator + __getTimezoneOffset()) : '';
 
+	let timezoneOffset = mergedOptions.includeTimezoneOffset ? __getTimezoneOffset() : '';
 	return (timeID + timezoneOffset);
 }
 

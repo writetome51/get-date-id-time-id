@@ -18,8 +18,10 @@ exports.__getAssembledIDParts = __getAssembledIDParts;
 function __getTimezoneOffset() {
     var offsetMinutes = new Date().getTimezoneOffset();
     var sign = (offsetMinutes < 0) ? '+' : '-';
-    var offsetHours = (offsetMinutes / 60);
-    return ('GMT' + sign + offsetHours);
+    var offsetHours = String(offsetMinutes / 60);
+    if (offsetHours.split('.')[0].length === 1)
+        offsetHours = ('0' + offsetHours);
+    return (sign + offsetHours);
 }
 exports.__getTimezoneOffset = __getTimezoneOffset;
 function __getMergedOptions(userOptions, getDefaultOptions) {

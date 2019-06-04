@@ -23,8 +23,7 @@ function getTimeID(options) {
         var _a = get_array_year_month_day_hours_minutes_seconds_1.getArray_hoursMinutesSeconds(), hour = _a[0], mins = _a[1], secs = _a[2];
         return { h: hour, m: mins, s: secs };
     });
-    var timezoneOffset = (mergedOptions.includeTimezoneOffset) ?
-        (mergedOptions.separator + privy_1.__getTimezoneOffset()) : '';
+    var timezoneOffset = mergedOptions.includeTimezoneOffset ? privy_1.__getTimezoneOffset() : '';
     return (timeID + timezoneOffset);
 }
 exports.getTimeID = getTimeID;
