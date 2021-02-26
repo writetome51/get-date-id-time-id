@@ -1,7 +1,8 @@
 {
   "name": "@writetome51/get-date-id-time-id",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Functions that return the current date as string of digits and return the current time as string of digits.",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -25,10 +26,11 @@
   },
   "homepage": "https://github.com/writetome51/get-date-id-time-id#readme",
   "dependencies": {
-    "@writetome51/get-array-year-month-day-hours-minutes-seconds": "0.0.1",
-    "@writetome51/has-value-no-value": "^1.0.2",
-    "@writetome51/modify-object": "^1.0.0",
-    "@writetome51/year-separator-options": "0.0.1",
-    "types-date-format-order-time-format-order": "^0.0.1"
+    "@writetome51/get-ymd-hms": ">=0.0.1",
+    "@writetome51/has-value-no-value": ">=2.0.0",
+    "@writetome51/modify-object": ">=2.0.0",
+    "@writetome51/to-str": ">=0.0.1",
+    "@writetome51/year-separator-options": ">=1.0.0",
+    "types-date-format-order-time-format-order": ">=0.0.1"
   }
 }

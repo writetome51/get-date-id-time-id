@@ -1,6 +1,6 @@
 # getDateID(options?): string
 ```ts
-// `options`:
+// options:
 {
     includeFullYear?: boolean, // default false
     order?: 'ymd' | 'ydm' | 'myd' | 'mdy' | 'dym' | 'dmy', // default 'ymd'
@@ -11,20 +11,20 @@
 
 # getTimeID(options?): string
 ```ts
-// `options`:
+// options:
 {
     order?: 'hms' | 'hsm' | 'msh' | 'mhs' | 'smh' | 'shm', // default 'hms'
     separator?: string, // default '-' 
-    separateEach?: boolean // default false
+    separateEach?: boolean, // default false
     includeTimezoneOffset?: boolean // default true
 }
 ```
 
-# getDefaultsFor_getTimeIDOptions():<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object
+# getDefaultTimeIDOptions():<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object
 
 Returns default options for `getTimeID()`.
   
-# getDefaultsFor_getDateIDOptions():<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object
+# getDefaultDateIDOptions():<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object
 
 Returns default options for `getDateID()`.
 
@@ -61,15 +61,6 @@ getTimeID({separateEach:true, separator: '__', order: 'smh'});
 
 ## Loading
 ```ts
-// if using TypeScript:
-import {getDateID, getTimeID, getDefaultsFor_getTimeIDOptions, 
-    getDefaultsFor_getDateIDOptions} from '@writetome51/get-date-id-time-id';
-
-// if using ES5 JavaScript:
-var getDateID = require('@writetome51/get-date-id-time-id').getDateID;
-var getTimeID = require('@writetome51/get-date-id-time-id').getTimeID;
-var getDefaultsFor_getTimeIDOptions = 
-    require('@writetome51/get-date-id-time-id').getDefaultsFor_getTimeIDOptions;
-var getDefaultsFor_getDateIDOptions = 
-    require('@writetome51/get-date-id-time-id').getDefaultsFor_getDateIDOptions;
+import {getDateID, getTimeID, getDefaultTimeIDOptions, 
+    getDefaultDateIDOptions} from '@writetome51/get-date-id-time-id';
 ```
