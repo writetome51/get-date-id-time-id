@@ -1,29 +1,33 @@
-import { getArray_hoursMinutesSeconds, getArray_yearMonthDay }
-	from '@writetome51/get-array-year-month-day-hours-minutes-seconds';
-import { getDateIDOptions, getTimeIDOptions } from './privy/interfaces';
-import { getDefaultsFor_SeparatorOptions, getDefaultsFor_YearSeparatorOptions }
-	from '@writetome51/year-separator-options';
+import { DateIDOptions, TimeIDOptions } from './privy/interfaces';
 import {
-	__getAssembledIDParts, __default_hmsOrder, __default_ymdOrder,
-	__getTimezoneOffset, __getMergedOptions
-}
-	from './privy';
+	getDefaultsFor_SeparatorOptions,
+	getDefaultsFor_YearSeparatorOptions
+} from '@writetome51/year-separator-options';
+import {
+	__default_hmsOrder,
+	__default_ymdOrder,
+	__getAssembledIDParts,
+	__getMergedOptions,
+	__getTimezoneOffset
+} from './privy/index';
+import { get_ymd_hms_local } from '@writetome51/get-ymd-hms';
 
 
 // Returns current date as string of digits.
 // Default format is yymmdd, i.e '190522' for May 22, 2019.
 
 export function getDateID(
-	options: getDateIDOptions = undefined
+	options: DateIDOptions = undefined
 ): string {
 
-	let mergedOptions: getDateIDOptions = __getMergedOptions(options, getDefaultsFor_getDateIDOptions);
+	let mergedOptions: DateIDOptions = __getMergedOptions(options, getDefaultDateIDOptions);
 
 	return __getAssembledIDParts(
 		mergedOptions,
 		() => {
-			let [year, month, day] = getArray_yearMonthDay(mergedOptions.includeFullYear);
-			return {y: year, m: month, d: day};
+			// @ts-ignore
+			let {ymd} = get_ymd_hms_local(new Date(), mergedOptions);
+			return ymd;
 		}
 	);
 }
@@ -33,16 +37,16 @@ export function getDateID(
 // Default format is hhmmss+-offset, i.e '162025-06' for 4:20:25pm, Denver daylight time.
 
 export function getTimeID(
-	options: getTimeIDOptions = undefined
+	options: TimeIDOptions = undefined
 ): string {
 
-	let mergedOptions: getTimeIDOptions = __getMergedOptions(options, getDefaultsFor_getTimeIDOptions);
+	let mergedOptions: TimeIDOptions = __getMergedOptions(options, getDefaultTimeIDOptions);
 
 	let timeID = __getAssembledIDParts(
 		mergedOptions,
 		() => {
-			let [hour, mins, secs] = getArray_hoursMinutesSeconds();
-			return {h: hour, m: mins, s: secs};
+			let {hms} = get_ymd_hms_local(new Date());
+			return hms;
 		}
 	);
 
@@ -51,16 +55,16 @@ export function getTimeID(
 }
 
 
-export function getDefaultsFor_getTimeIDOptions(): getTimeIDOptions {
-	let defaults = getDefaultsFor_SeparatorOptions();
-	defaults['order'] = __default_hmsOrder;
-	defaults['includeTimezoneOffset'] = true;
-	return defaults;
+export function getDefaultTimeIDOptions(): TimeIDOptions {
+	let options = getDefaultsFor_SeparatorOptions();
+	options['order'] = __default_hmsOrder;
+	options['includeTimezoneOffset'] = true;
+	return options;
 }
 
 
-export function getDefaultsFor_getDateIDOptions(): getDateIDOptions {
-	let defaults = getDefaultsFor_YearSeparatorOptions();
-	defaults['order'] = __default_ymdOrder;
-	return defaults;
+export function getDefaultDateIDOptions(): DateIDOptions {
+	let options = getDefaultsFor_YearSeparatorOptions();
+	options['order'] = __default_ymdOrder;
+	return options;
 }
