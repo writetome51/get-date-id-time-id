@@ -1,35 +1,34 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var modify_object_1 = require("@writetome51/modify-object");
-var has_value_no_value_1 = require("@writetome51/has-value-no-value");
-function __getAssembledIDParts(options, 
-// must return object with 3 letter properties, either {y,m,d} or {h,m,s} .
-getParts) {
-    // @ts-ignore
-    options.order = options.order.toLowerCase();
-    if (options.order.length !== 3)
-        throw new Error('Input must be string 3 characters long');
-    var sep = options.separateEach ? options.separator : '';
-    var parts = getParts();
-    return (parts[options.order[0]] + sep + parts[options.order[1]] +
-        sep + parts[options.order[2]]);
+import {modifyObject} from '@writetome51/modify-object';
+import {hasValue} from '@writetome51/has-value-no-value';
+import {toStr} from '@writetome51/to-str';
+
+
+export function __getAssembledIDParts(options, getParts) {
+	// @ts-ignore
+	options.order = options.order.toLowerCase();
+	if (options.order.length !== 3) throw new Error('Input must be string 3 characters long');
+	let sep = options.separateEach ? options.separator : '';
+	let parts = getParts();
+	return (parts[options.order[0]] + sep + parts[options.order[1]] +
+		sep + parts[options.order[2]]);
 }
-exports.__getAssembledIDParts = __getAssembledIDParts;
-function __getTimezoneOffset() {
-    var offsetMinutes = new Date().getTimezoneOffset();
-    var sign = (offsetMinutes < 0) ? '+' : '-';
-    var offsetHours = String(offsetMinutes / 60);
-    if (offsetHours.split('.')[0].length === 1)
-        offsetHours = ('0' + offsetHours);
-    return (sign + offsetHours);
+
+
+export function __getTimezoneOffset() {
+	let offsetMinutes = new Date().getTimezoneOffset();
+	let sign = (offsetMinutes < 0) ? '+' : '-';
+	let offsetHours = toStr(offsetMinutes / 60);
+	if (offsetHours.split('.')[0].length === 1) offsetHours = ('0' + offsetHours);
+	return (sign + offsetHours);
 }
-exports.__getTimezoneOffset = __getTimezoneOffset;
-function __getMergedOptions(userOptions, getDefaultOptions) {
-    var defaults = getDefaultOptions();
-    if (has_value_no_value_1.hasValue(userOptions))
-        modify_object_1.modifyObject(defaults, userOptions);
-    return defaults;
+
+
+export function __getMergedOptions(userOptions, getDefaultOptions) {
+	let defaults = getDefaultOptions();
+	if (hasValue(userOptions)) modifyObject(defaults, userOptions);
+	return defaults;
 }
-exports.__getMergedOptions = __getMergedOptions;
-exports.__default_ymdOrder = 'ymd';
-exports.__default_hmsOrder = 'hms';
+
+
+export const __default_ymdOrder = 'ymd';
+export const __default_hmsOrder = 'hms';
