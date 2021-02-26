@@ -1,13 +1,13 @@
-import { getDateIDOptions, getTimeIDOptions } from './interfaces';
+import { DateIDOptions, TimeIDOptions } from './interfaces';
 import { modifyObject } from '@writetome51/modify-object';
 import { hasValue } from '@writetome51/has-value-no-value';
+import { toStr } from '@writetome51/to-str';
+import { H_M_S, Y_M_D } from '@writetome51/get-ymd-hms';
 
 
 export function __getAssembledIDParts(
-	options: getDateIDOptions | getTimeIDOptions,
-
-	// must return object with 3 letter properties, either {y,m,d} or {h,m,s} .
-	getParts: () => Object
+	options: DateIDOptions | TimeIDOptions,
+	getParts: () => Y_M_D | H_M_S
 ) {
 	// @ts-ignore
 	options.order = options.order.toLowerCase();
@@ -24,7 +24,7 @@ export function __getAssembledIDParts(
 export function __getTimezoneOffset(): string {
 	let offsetMinutes = new Date().getTimezoneOffset();
 	let sign = (offsetMinutes < 0) ? '+' : '-';
-	let offsetHours = String(offsetMinutes / 60);
+	let offsetHours = toStr(offsetMinutes / 60);
 	if (offsetHours.split('.')[0].length === 1) offsetHours = ('0' + offsetHours);
 	return (sign + offsetHours);
 }
@@ -39,3 +39,4 @@ export function __getMergedOptions(userOptions, getDefaultOptions: () => Object)
 
 export const __default_ymdOrder = 'ymd';
 export const __default_hmsOrder = 'hms';
+

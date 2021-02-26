@@ -13,6 +13,9 @@ import {
 import { get_ymd_hms_local } from '@writetome51/get-ymd-hms';
 
 
+export { DateIDOptions, TimeIDOptions } from './privy/interfaces';
+
+
 // Returns current date as string of digits.
 // Default format is yymmdd, i.e '190522' for May 22, 2019.
 
@@ -23,12 +26,8 @@ export function getDateID(
 	let mergedOptions: DateIDOptions = __getMergedOptions(options, getDefaultDateIDOptions);
 
 	return __getAssembledIDParts(
-		mergedOptions,
-		() => {
-			// @ts-ignore
-			let {ymd} = get_ymd_hms_local(new Date(), mergedOptions);
-			return ymd;
-		}
+		mergedOptions, // @ts-ignore
+		() => get_ymd_hms_local(new Date(), mergedOptions).ymd
 	);
 }
 
