@@ -1,13 +1,9 @@
 import {
-	getDefaultsFor_SeparatorOptions,
-	getDefaultsFor_YearSeparatorOptions
+	getDefaultsFor_SeparatorOptions, getDefaultsFor_YearSeparatorOptions
 } from '@writetome51/year-separator-options';
 import {
-	__default_hmsOrder,
-	__default_ymdOrder,
-	__getAssembledIDParts,
-	__getMergedOptions,
-	__getTimezoneOffset
+	__default_hmsOrder, __default_ymdOrder,
+	__getAssembledIDParts, __getMergedOptions, __getTimezoneOffset
 } from './privy/index.js';
 import {get_ymd_hms_local} from '@writetome51/get-ymd-hms';
 
@@ -17,11 +13,9 @@ import {get_ymd_hms_local} from '@writetome51/get-ymd-hms';
 
 export function getDateID(options = undefined) {
 	let mergedOptions = __getMergedOptions(options, getDefaultDateIDOptions);
-	return __getAssembledIDParts(mergedOptions, () => {
-		// @ts-ignore
-		let {ymd} = get_ymd_hms_local(new Date(), mergedOptions);
-		return ymd;
-	});
+	return __getAssembledIDParts(mergedOptions, // @ts-ignore
+		() => get_ymd_hms_local(new Date(), mergedOptions).ymd
+	);
 }
 
 
